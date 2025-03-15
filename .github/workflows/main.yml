@@ -34,5 +34,5 @@ jobs:
           else
             echo "Found SQL files:"
             echo "$sql_files"
-            sqlfluff lint $sql_files
+            sqlfluff lint --dialect mysql $sql_files
           fi
