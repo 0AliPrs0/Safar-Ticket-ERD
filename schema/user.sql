@@ -73,11 +73,11 @@ INSERT INTO User (
     'active'
 );
 
-SELECT *
+SELECT user_id, first_name, last_name, email, phone_number, user_type
 FROM User
 WHERE first_name = 'Ali';
 
-SELECT *
+SELECT user_id, first_name, last_name, email, phone_number, user_type
 FROM User
 WHERE phone_number = '09938634069';
 
