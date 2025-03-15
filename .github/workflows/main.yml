@@ -3,10 +3,10 @@ name: SQL Validation
 on:
   push:
     branches:
-      - main 
+      - '**' 
   pull_request:
     branches:
-      - main
+      - '**'  
 
 jobs:
   validate-sql:
@@ -25,18 +25,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install sqlfluff
 
-      - name: Get changed SQL files
-        id: changed-files
-        uses: tj-actions/changed-files@v20
-        with:
-          files: |
-            **/*.sql
-
       - name: Validate SQL files
         run: |
-          if [ -n "${{ steps.changed-files.outputs.all_changed_files }}" ]; then
-            echo "Validating SQL files..."
-            sqlfluff lint ${{ steps.changed-files.outputs.all_changed_files }}
+          echo "Validating SQL files..."
+          sql_files=$(find . -type f -name "*.sql")
+          if [ -z "$sql_files" ]; then
+            echo "No SQL files found."
           else
-            echo "No SQL files changed."
+            echo "Found SQL files:"
+            echo "$sql_files"
+            sqlfluff lint $sql_files
           fi
