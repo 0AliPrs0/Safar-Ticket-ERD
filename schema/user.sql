@@ -1,83 +1,95 @@
-CREATE TABLE User (
-    user_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    first_name VARCHAR(100) NOT NULL,
-    last_name VARCHAR(100) NOT NULL,
-    email VARCHAR(255) UNIQUE,
-    phone_number VARCHAR(20) UNIQUE,
-    user_type ENUM('customer', 'support', 'admin') NOT NULL,
-    city VARCHAR(100),
-    password_hash VARCHAR(255) NOT NULL,
-    registration_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    account_status ENUM('active', 'inactive') NOT NULL DEFAULT 'active',
+CREATE TABLE USER (
+    USER_ID BIGINT PRIMARY KEY AUTO_INCREMENT,
+    FIRST_NAME VARCHAR(100) NOT NULL,
+    LAST_NAME VARCHAR(100) NOT NULL,
+    EMAIL VARCHAR(255) UNIQUE,
+    PHONE_NUMBER VARCHAR(20) UNIQUE,
+    USER_TYPE ENUM('CUSTOMER', 'SUPPORT', 'ADMIN') NOT NULL,
+    CITY VARCHAR(100),
+    PASSWORD_HASH VARCHAR(255) NOT NULL,
+    REGISTRATION_DATE DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    ACCOUNT_STATUS ENUM('ACTIVE', 'INACTIVE') NOT NULL DEFAULT 'ACTIVE',
     CHECK (
-        email IS NOT NULL OR phone_number IS NOT NULL
+        EMAIL IS NOT NULL OR PHONE_NUMBER IS NOT NULL
     ),
     CHECK (
-        email REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$'
-        OR email IS NULL
+        EMAIL REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$'
+        OR EMAIL IS NULL
     ),
     CHECK (
-        phone_number REGEXP '^[0-9]{10,15}$'
-        OR phone_number IS NULL
+        PHONE_NUMBER REGEXP '^[0-9]{10,15}$'
+        OR PHONE_NUMBER IS NULL
     )
 );
 
-CREATE INDEX email_pass_idx
-ON User (email, password_hash);
+CREATE INDEX EMAIL_PASS_IDX
+ON USER (EMAIL, PASSWORD_HASH);
 
-INSERT INTO User (
-    user_id,
-    first_name,
-    last_name,
-    email,
-    phone_number,
-    user_type,
-    city,
-    password_hash,
-    registration_date,
-    account_status
+INSERT INTO USER (
+    USER_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    EMAIL,
+    PHONE_NUMBER,
+    USER_TYPE,
+    CITY,
+    PASSWORD_HASH,
+    REGISTRATION_DATE,
+    ACCOUNT_STATUS
 ) VALUES (
     1,
     'Ali',
     'Prs',
     'test@test.com',
     '09032948208',
-    'customer',
+    'CUSTOMER',
     'Ardebil',
     '11f0f5d8293fd1d996210e49d4642dadb6c1463ff9c47c888d45d4a1fb47eb6a',
     '2024-10-04 13:10:19',
-    'active'
+    'ACTIVE'
 );
 
-INSERT INTO User (
-    user_id,
-    first_name,
-    last_name,
-    email,
-    phone_number,
-    user_type,
-    city,
-    password_hash,
-    registration_date,
-    account_status
+INSERT INTO USER (
+    USER_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    EMAIL,
+    PHONE_NUMBER,
+    USER_TYPE,
+    CITY,
+    PASSWORD_HASH,
+    REGISTRATION_DATE,
+    ACCOUNT_STATUS
 ) VALUES (
     2,
     'Mehdi',
     'Salman',
     'test2@test2.com',
     '09938634069',
-    'customer',
+    'CUSTOMER',
     'Tehran',
     '71a5f574ff500816cea8b3d5fd8555dbee7493773f04870217a111984c0fc13f',
     '2024-10-04 13:20:39',
-    'active'
+    'ACTIVE'
 );
 
-SELECT user_id, first_name, last_name, email, phone_number, user_type
-FROM User
-WHERE first_name = 'Ali';
+SELECT 
+    USER_ID, 
+    FIRST_NAME, 
+    LAST_NAME, 
+    EMAIL, 
+    PHONE_NUMBER, 
+    USER_TYPE
+FROM USER
+WHERE FIRST_NAME = 'Ali';
 
-SELECT user_id, first_name, last_name, email, phone_number, user_type
-FROM User
-WHERE phone_number = '09938634069';
+SELECT 
+    USER_ID, 
+    FIRST_NAME, 
+    LAST_NAME, 
+    EMAIL, 
+    PHONE_NUMBER, 
+    USER_TYPE
+FROM USER
+WHERE PHONE_NUMBER = '09938634069';
 
