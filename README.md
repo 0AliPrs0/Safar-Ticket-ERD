@@ -1,106 +1,78 @@
-# 🚀 سفر تیکت - سیستم رزرو بلیط سفر
+# 🚀 SafarTicket - Travel Reservation System
 
-## 📖 معرفی پروژه
-به **سفر تیکت** خوش آمدید! این پلتفرم جامع برای رزرو بلیط‌های سفر داخلی شامل **قطار**، **اتوبوس** و **هواپیما** طراحی شده است. با استفاده از سفر تیکت، کاربران می‌توانند به‌راحتی و در چند کلیک، بهترین گزینه‌های سفر را پیدا و رزرو کنند.
+## 📖 Overview
+Welcome to **SafarTicket**, a comprehensive platform for booking domestic travel tickets, including **trains**, **buses**, and **airplanes**. With SafarTicket, users can easily find and book the best travel options in just a few clicks.
 
-## 🛠️ فناوری‌های استفاده‌شده
-- **پایگاه داده:** MySQL
-- **طراحی ERD:** [Lucidchart](https://lucid.app/documents/#/home)
+## 🛠️ Technologies Used
+- **Database:** MySQL
+- **ERD Design:** [Lucidchart](https://lucid.app/documents/#/home)
 
-## 📋 دیاگرام پایگاه داده
-شما می‌توانید دیاگرام را از طریق لینک زیر مشاهده کنید:
+## 📋 Database Schema
+You can view the diagram via the link below:
 
-[🔗 مشاهده دیاگرام ER]([https://lucid.app/lucidchart/d58bbffb-0eed-4062-bd9c-fb75394c9f8e/edit?invitationId=inv_2a92ef1f-2e1d-4909-9176-9543f1d1c5b2&page=0_0#](https://lucid.app/lucidchart/d58bbffb-0eed-4062-bd9c-fb75394c9f8e/edit?invitationId=inv_2a92ef1f-2e1d-4909-9176-9543f1d1c5b2&page=0_0#))
-
----
-
-## 📖 فهرست مطالب
-- [📑 Enumها](#-enumها)  
-- [🗄 جدول‌ها](#-جدول‌ها)  
-- [🔗 روابط](#-روابط)  
-- [⚡️ ایندکس‌ها](#-ایندکس‌ها)  
-- [🚀 نحوه استفاده](#-نحوه-استفاده)  
-
+[🔗 View ER Diagram](https://lucid.app/lucidchart/d58bbffb-0eed-4062-bd9c-fb75394c9f8e/edit?invitationId=inv_2a92ef1f-2e1d-4909-9176-9543f1d1c5b2&page=0_0#)
 
 ---
 
-## 🔢 Enumها
-در این پروژه از **Enum** برای استانداردسازی مقادیر برخی فیلدها استفاده شده است:
-
-| دسته‌بندی         | مقادیر  |
-|----------------------|------------|
-| نقش کاربر        | ADMIN, USER  |
-| وضعیت کاربر      | ACTIVE, NON-ACTIVE  |
-| نوع پرداخت     | CASH, CREDIT_CARD, WALLET, BANK_TRANSFER, CRYPTO  |
-| وضعیت بلیط    | RESERVED, RESERVING, CANCELED, CANCELED-BY-TIME  |
-| وضعیت پرداخت   | PENDING, COMPLETED, FAILED, REFUNDED  |
-| نوع وسیله نقلیه     | BUS, TRAIN, AIRPLANE  |
-| کلاس پرواز     | ECONOMY, PREMIUM-ECONOMY, BUSINESS, FIRST  |
-| وضعیت فعالیت  | PENDING, REMINDER-SENT, PURCHASED  |
-| وضعیت اطلاع‌رسانی | SENT, FAILED  |
+## 📖 Table of Contents 
+- [🗄 Tables](#-tables)  
+- [🔗 Relationships](#-relationships)  
+- [⚡️ Indexes](#-indexes)  
+- [🚀 Usage](#-usage)  
 
 ---
 
-## 🗄 جدول‌ها
+## 🗄 Tables
 
-### 👤 مدیریت کاربران
-- `user` → اطلاعات احراز هویت کاربران (ایمیل، شماره تلفن، رمز عبور، نقش، وضعیت).  
-- `profile` → اطلاعات شخصی کاربران (نام، شهر، کد ملی).  
-- `report` → گزارش‌های کاربران و پاسخ‌های ادمین.  
+### 👤 User Management
+- `user` → Stores authentication data (first_name,last_name, city, email, phone_number, password_hash, user_type, account_status, registration_data).   
+- `report` → Logs user reports and admin responses. (user_id, ticket_id, report_category, report_text, status, report_time) 
 
-### 🎟 رزرو و بلیط‌ها
-- `reservation` → مدیریت رزروها (کاربر، بلیط، پرداخت، وضعیت).  
-- `ticket` → اطلاعات بلیط‌ها (وسیله نقلیه، صندلی، مسیر، زمان حرکت/رسیدن، قیمت).  
-- `payment` → مدیریت تراکنش‌های پرداخت (نوع، وضعیت، جزئیات).  
-- `admin_change_reservation` → تغییرات ادمین در رزروها.  
+### 🎟 Reservation & Ticketing
+- `reservation` → Manages reservations (user_id, ticket_id, status, reservation_time, expiration_time).  
+- `ticket` → Holds ticket details (travel_id, seat_number).  
+- `payment` → Manages payment transactions (user_id, reservation_id, amount, payment_method, payment_status, payment_date).   
 
-### 🚏 اطلاعات سفر
-- `route` → اطلاعات مسیرها (مبدأ، مقصد، ترمینال‌ها).  
-- `city` → اطلاعات شهرها (استان، شهرستان).  
-- `terminal` → اطلاعات ترمینال‌ها (نام، آدرس).  
+### 🚏 Travel Information
+- `travel` → Store travel data (transport_type, departure, destination, depature_time, arival_time, total_capacity, transport_company_id, travel_class, remaining_capacity, price, is_round_trip) 
 
-### 🚍 وسایل نقلیه و صندلی‌ها
-- `company` → اطلاعات شرکت‌های حمل‌ونقل.  
-- `vehicle` → اطلاعات وسایل نقلیه (شرکت، ظرفیت، امکانات).  
-- `bus, train, airplane` → اطلاعات خاص هر نوع وسیله نقلیه.  
-- `seat` → اطلاعات صندلی‌ها (وسیله نقلیه، شماره صندلی، وضعیت).  
-- `bus_seat, train_seat, airplane_seat` → اطلاعات صندلی‌های خاص هر وسیله نقلیه.  
-
-### ⚡️ ویژگی‌های اضافی
-- `penalty` → جریمه‌های مربوط به وسایل نقلیه.  
-- `user_activity` → فعالیت‌های کاربران (مسیر، نوع وسیله نقلیه، وضعیت).  
-- `notification_log` → اطلاع‌رسانی‌های ارسال‌شده به کاربران.  
-- `send_email_sms` → ایمیل‌ها و پیامک‌های ارسال‌شده.  
-- `send_verification_code` → کدهای تأیید ارسال‌شده به کاربران.  
+### 🚍 Vehicles 
+- `vehicleDetail` → Stores vehicle details (ticket_id, vehicle_type).  
+- `bus, train, airplane` → Store specific details for each vehicle type.  
 
 ---
 
-## 🔗 روابط
+## 🔗 Relationships
 
-| جدول | مرتبط با |
+| Table | Related To |
 |-----------|---------------|
-| `profile` | `user` (user_id) |
-| `report` | `user` (هم کاربر و هم ادمین) |
-| `reservation` | `user`, `ticket`, `payment` |
-| `ticket` | `vehicle`, `seat`, `route` |
-| `payment` | `reservation` |
-| `admin_change_reservation` | `reservation`, `user` |
-| `route` | `city`, `terminal` |
-| `vehicle` | `company` |
-| `seat` | `vehicle` |
-| `user_activity` | `user`, `route` |
-| `notification_log` | `user`, `send_email_sms`, `user_activity` |
-| `send_verification_code` | `user`, `send_email_sms` |
+| `report` | `user` (both user and admin), `ticket` |
+| `reservation` | `user`, `ticket` |
+| `ticket` |  `travel` |
+| `payment` | `reservation`, `user`|
+| `vehicleDetail` | `ticket`|
+| `BusDetail` | `vehicleDetail` |
+| `FlightDetail` | `vehicleDetail` |
+| `TrainDetail` | `vehicleDetail` |
 
 ---
 
-## ⚡️ ایندکس‌ها
+## ⚡️ Indexes
 
-برای بهبود عملکرد کوئری‌ها، ایندکس‌های زیر اعمال شده‌اند:  
+To enhance query performance, indexes are applied to:  
 
-- ✅ `email`, `phone_number` → در جدول `user`  
-- ✅ `user_id` → در جدول `profile`  
-- ✅ `route_id`, `departure_time` → در جدول `ticket`  
-- ✅ `origin_city_id`, `destination_city_id` → در جدول `route`  
+- ✅ `email`, `password_hash` → in `user` table  
+- ✅ `departure`, `destination` → in `travel` table  
+
+---
+
+## 🚀 Usage
+
+This database supports a full-featured travel reservation system, allowing users to:  
+✔️ Book tickets  
+✔️ Make payments  
+✔️ Manage reservations  
+✔️ Receive notifications  
+
 
 ---
