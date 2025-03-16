@@ -2,13 +2,10 @@
 dialect = mysql
 
 [sqlfluff:rules]
-layout.spacing = none
-layout.select_targets = none
-layout.end_of_file = none
-capitalisation.identifiers = none
-capitalisation.keywords = none
-capitalisation.functions = none
-capitalisation.types = none
-
-
-
+layout.spacing = ignore
+layout.long_lines = ignore
+layout.end_of_file = ignore
+capitalisation.identifiers = ignore
+capitalisation.keywords = ignore
+capitalisation.functions = ignore
+capitalisation.types = ignore
