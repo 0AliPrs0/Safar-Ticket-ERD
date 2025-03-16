@@ -2,4 +2,16 @@
 dialect = mysql
 
 [sqlfluff:rules]
-capitalisation_identifiers = lower
+
+layout.spacing = none
+layout.long_lines = none
+
+
+capitalisation.identifiers = none
+capitalisation.keywords = none
+capitalisation.functions = none
+capitalisation.types = none
+
+
+layout.select_targets = none
+layout.end_of_file = none
