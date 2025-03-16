@@ -4,7 +4,7 @@ dialect = mysql
 [sqlfluff:rules]
 
 layout.spacing = none
-layout.long_lines = none
+
 
 
 capitalisation.identifiers = none
