@@ -30,14 +30,14 @@ You can view the diagram via the link below:
 
 ### 🎫 Reservation & Ticketing
 - `reservation` → Manages reservations (user_id, ticket_id, status, reservation_time, expiration_time).  
-- `ticket` → Holds ticket details (travel_id, seat_number).  
+- `ticket` → Holds ticket details (travel_id, seat_number, vehicle_id).  
 - `payment` → Manages payment transactions (user_id, reservation_id, amount, payment_method, payment_status, payment_date).   
 
 ### 🚉 Travel Information
 - `travel` → Store travel data (transport_type, departure, destination, departure_time, arrival_time, total_capacity, transport_company_id, travel_class, remaining_capacity, price, is_round_trip) 
 
 ### 🚗 Vehicles 
-- `vehicleDetail` → Stores vehicle details (ticket_id, vehicle_type).  
+- `vehicleDetail` → Stores vehicle details (vehicle_type).  
 - `busDetail` → Store specific details for each bus (bus_company, bus_type, facilities, seat_arrangement)
 - `trainDetail` → Store specific details for each train (train_rating, private_cabin, facilities)
 - `flightDetail` → Store specific details for each flight (airline_name, flight_class, stops, flight_number, origin_airport, facilities, destination_airport)   
