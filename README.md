@@ -17,7 +17,7 @@ You can view the diagram via the link below:
 ## 📖 Table of Contents 
 - [📊 Tables](#-tables)  
 - [🔗 Relationships](#-relationships)  
-- [⚡️ Indexes](#-indexes)  
+- [⚡️ Indexes](#️-indexes)  
 - [🚀 Usage](#-usage)  
 
 ---
