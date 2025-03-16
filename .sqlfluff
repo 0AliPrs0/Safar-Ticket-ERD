@@ -1,11 +1,7 @@
 [sqlfluff]
 dialect = mysql
 
-[sqlfluff:rules]
-layout.spacing = ignore
-layout.long_lines = ignore
-layout.end_of_file = ignore
-capitalisation.identifiers = ignore
-capitalisation.keywords = ignore
-capitalisation.functions = ignore
-capitalisation.types = ignore
+[sqlfluff:exclude_rules]
+L010 = true 
+L014 = true  
+L039 = true 
