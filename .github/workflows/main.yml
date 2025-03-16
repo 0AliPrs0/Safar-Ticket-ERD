@@ -36,3 +36,15 @@ jobs:
             echo "$sql_files"
             sqlfluff lint --dialect mysql $sql_files
           fi
+
+      - name: Fix SQL files
+        run: |
+          echo "Fixing SQL files..."
+          sql_files=$(find . -type f -name "*.sql")
+          if [ -z "$sql_files" ]; then
+            echo "No SQL files found."
+          else
+            echo "Found SQL files:"
+            echo "$sql_files"
+            sqlfluff fix --dialect mysql $sql_files
+          fi
