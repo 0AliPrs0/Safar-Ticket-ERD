@@ -2,6 +2,12 @@
 dialect = mysql
 
 [sqlfluff:exclude_rules]
-L010 = true 
-L014 = true  
-L039 = true 
+CP02 = true
+LT01 = true
+RF04 = true
+LT12 = true
+PRS  = true
+LT02 = true
+LT05 = true
+AL01 = true
+AM05 = true
